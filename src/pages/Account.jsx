@@ -1,35 +1,34 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: '_id', headerName: 'ID', width: 220},
   {
-    field: 'firstName',
-    headerName: 'First name',
+    field: 'user_name',
+    headerName: 'Name',
     width: 150,
     editable: true,
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
+    field: 'user_phone',
+    headerName: 'Phone',
     width: 150,
     editable: true,
   },
   {
-    field: 'age',
-    headerName: 'Age',
+    field: 'user_email',
+    headerName: 'Email',
     type: 'number',
-    width: 110,
+    width: 160,
     editable: true,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
+    field: 'user_cccd',
+    headerName: 'CCCD',
     sortable: false,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
 ];
 
@@ -46,21 +45,34 @@ const rows = [
 ];
 
 const Account = () => {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        axios.get('http://localhost:8000/user/')
+        .then((res) => {
+            setData(res.data);
+        }).then(() => {
+            console.log(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, []);
     return (
         <Box sx={{ height: '100%', width: '100%' }}>
           <DataGrid
-            rows={rows}
+            rows={data}
             columns={columns}
             initialState={{
               pagination: {
                 paginationModel: {
-                  pageSize: 11,
+                  pageSize: 10,
                 },
               },
             }}
             pageSizeOptions={[5]}
             checkboxSelection
             disableRowSelectionOnClick
+            getRowId={(row) => row._id}
           />
         </Box>
       );

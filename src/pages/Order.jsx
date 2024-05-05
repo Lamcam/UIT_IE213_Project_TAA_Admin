@@ -1,69 +1,84 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import React from "react";
+import Box from "@mui/material/Box";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: "id", headerName: "ID", width: 90 },
   {
-    field: 'firstName',
-    headerName: 'First name',
+    field: "date_time",
+    headerName: "Ngày đặt hàng",
     width: 150,
     editable: true,
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
+    field: "cost",
+    headerName: "Giá trị đơn hàngr",
     width: 150,
     editable: true,
   },
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
+    field: "user_name",
+    headerName: "Người đặt hàng",
+    type: "number",
     width: 110,
     editable: true,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
+    field: "prod_name",
+    headerName: "Tên sản phẩm",
+    sortable: true,
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
   },
 ];
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+const createData = (info) => {
+  const temp = info.map((item) => {
+    return {
+      id: item._id,
+      date_time: item.order_id.order_datetime,
+      cost: item.order_id.order_total_cost.$numberDecimal,
+      user_name: item.order_id.user_id.user_name,
+      prod_name: item.prod_id.prod_name,
+      quanity: item.quantity,
+      status: item.order_id.order_status,
+    };
+  });
+  return temp;
+};
 
 const Order = () => {
-    return (
-        <Box sx={{ height: '100%', width: '100%' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 11,
-                },
-              },
-            }}
-            pageSizeOptions={[5]}
-            checkboxSelection
-            disableRowSelectionOnClick
-          />
-        </Box>
-      );
-}
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/order/orderdetail")
+      .then((res) => {
+        setData(createData(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  return (
+    <Box sx={{ height: "100%", width: "100%" }}>
+      <DataGrid
+        rows={data}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 11,
+            },
+          },
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+        getRowId={(row) => row.id}
+      />
+    </Box>
+  );
+};
 
 export default Order;
