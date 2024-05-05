@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import { FaRegBell } from "react-icons/fa";
 import AccountSection from './Avatar';
-import 'Style/Header.scss';
+import 'styles/Header.scss';
 
 const Header = () => {
     return (

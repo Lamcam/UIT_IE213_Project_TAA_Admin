@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Header from './Component/Header';
+import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SideBar from 'Component/SideBar';
+import SideBar from 'components/SideBar';
 import { BrowserRouter } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
