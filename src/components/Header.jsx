@@ -9,19 +9,13 @@ const Header = () => {
         <header>
             <Container className='header_container'>
             <Row>
-            <Col lg={3}>
-                <div className='logo'>
-                    <h1>Admin</h1>
-                </div>
-            </Col>
-
-            <Col lg={8}>
+            <Col lg={12}>
             <Row className='header_wrapper'>
-                <Col>
+                <Col lg={4}>
                     <h1>Admin Panel</h1>
                 </Col>
 
-                <Col>       
+                <Col lg={4}>       
                     <div className="user-info">
                         <FaRegBell />
                         <p>Hello Solari</p>

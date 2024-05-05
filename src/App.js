@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  Route,
+  Router,
+  Routes,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
+import { Fragment } from 'react';
+import AdminRootLayout from 'routers/AdminRootLayout';
+import Dashboard from 'pages/Dashboard';
+import News from 'pages/News';
+import Products from 'pages/Products';
+import Account from 'pages/Account';
+import Order from 'pages/Order';
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<AdminRootLayout></AdminRootLayout>}>
+      <Route index element={<Dashboard />} />
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="news" element={<News />} />
+      <Route path="products" element={<Products />} />
+      <Route path="accounts" element={<Account />} />
+      <Route path="order" element={<Order />} />
+    </Route>,
+  ),
+);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <RouterProvider router={router} />
+    </Fragment>
   );
 }
 

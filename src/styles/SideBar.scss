@@ -1,17 +1,45 @@
 .sidebar{
     width: 300px;
+    min-height: 100vh;
     text-decoration: none;
     color: black;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     background-color: wheat;
+    ul{
+        padding-left: 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: start;
+        align-self: flex-start;
+        width: 100%;
+    }
+    li{
+        list-style: none;
+        padding: 1rem;
+        padding-left: 0px;
+        font-size: 1.3rem;
+        font-weight: 300;
+        cursor: pointer;
+        transition: all .3s;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        &:hover{
+            background-color: #f0f0f0;
+        }
 
+        a{
+        text-decoration: none;
+        color: black;
+        }
+    }
     .sidebar_container{
         display: flex;
         flex-direction: column;
         gap: 1rem;
         justify-content: start;
-        align-items: center;
     }
 }
 
