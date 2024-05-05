@@ -1,0 +1,17 @@
+.sidebar{
+    width: 300px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    background-color: wheat;
+
+    .sidebar_container{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: start;
+        align-items: center;
+    }
+}
+
