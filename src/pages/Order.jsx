@@ -33,13 +33,24 @@ const columns = [
   },
 ];
 
+const formatMoney = (amount) => {
+  amount = amount.toString().replace();
+  const parts = amount.toString().split('.');
+  const formattedAmount = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (parts[1] ? `.${parts[1]}` : '');
+  return formattedAmount;
+}
+
 const createData = (info) => {
   const temp = info.map((item) => {
+    let name = 'Khách vãng lai'
+    if(item.order_id.user_id){
+      name = item.order_id.user_id.user_name;
+    }
     return {
       id: item._id,
       date_time: item.order_id.order_datetime,
-      cost: item.order_id.order_total_cost.$numberDecimal,
-      user_name: item.order_id.user_id.user_name,
+      cost: formatMoney(item.order_id.order_total_cost.$numberDecimal),
+      user_name: name,
       prod_name: item.prod_id.prod_name,
       quanity: item.quantity,
       status: item.order_id.order_status,
