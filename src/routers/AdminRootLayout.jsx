@@ -8,10 +8,10 @@ export default function AdminRootLayout() {
             {/* <Header /> */}
             <Container fluid style={{padding: '0px'}}>
             <Row>
-                <Col lg={3} >
+                <Col lg={2} >
                     <SideBar></SideBar>
                 </Col>
-                <Col lg={9}>
+                <Col lg={10}>
                 <Header></Header>
                 <main>
                     <div className="content_rootLayout" >

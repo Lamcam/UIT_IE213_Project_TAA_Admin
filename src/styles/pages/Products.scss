@@ -1,0 +1,47 @@
+#ad_product {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#ad_product .table_product {
+  height: 100%;
+  width: 100%;
+}
+
+#ad_product .MuiDataGrid-columnHeaderTitleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #ba1a1a;
+}
+#ad_product .content__center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#ad_product .header__product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .search__product {
+    width: 40%;
+    & input:focus-visible {
+      outline: 1px solid var(--M3-sys-light-outline, #857373);
+    }
+  }
+  .search__product input {
+    height: 40px;
+    width: 100%;
+    padding: 12px;
+    line-height: 40px;
+    border-radius: 4px;
+    border: 1px solid var(--M3-sys-light-outline, #857373);
+  }
+  & .add__delete_product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
