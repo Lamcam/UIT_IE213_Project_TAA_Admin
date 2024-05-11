@@ -1,4 +1,4 @@
-const Button = ({ className, label, type, backgroundColor, labelColor, fontSize, border, onClick, icon: Icon, iconWidth, iconHeight }) => {
+const Button = ({ className, label, type, backgroundColor, labelColor, fontSize, border, onClick, icon: Icon, iconWidth, iconHeight, disable }) => {
     const buttonStyle = {
         minWidth: '8rem',
         borderRadius: '8px',

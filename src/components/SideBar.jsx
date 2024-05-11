@@ -20,7 +20,7 @@ const SideBar = () => {
         <Row className="nav_container">
         <ul>
           <li>
-            <NavLink to="/"><TfiDashboard/>Bảng điều khiển</NavLink>
+            <NavLink to="/dashboard"><TfiDashboard/>Bảng điều khiển</NavLink>
           </li>
           <li>
             <NavLink to="/accounts"><FaUser/> Tài Khoản</NavLink>
