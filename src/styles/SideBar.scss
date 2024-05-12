@@ -1,5 +1,5 @@
 .sidebar{
-    width: 300px;
+    width: 200px;
     min-height: 100vh;
     text-decoration: none;
     color: black;
@@ -45,6 +45,11 @@
         justify-content: start;
         text-decoration: none;
         color: black;
+        }
+
+        a.active{
+            background-color: var(--md-source);
+            color: white;
         }
     }
 }

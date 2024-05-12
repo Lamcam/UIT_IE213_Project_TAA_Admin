@@ -18,7 +18,8 @@ const Header = () => {
                 <Col lg={4}>       
                     <div className="user-info">
                         <FaRegBell />
-                        <p>Hello Solari</p>
+                        {/* <p>Xin chào Solari</p> */}
+                        <h5>Xin chào Admin</h5>
                         <AccountSection></AccountSection>
                     </div>
                 </Col>
