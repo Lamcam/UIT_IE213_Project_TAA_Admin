@@ -2,11 +2,13 @@ import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from 'components/Common/Button1';
 import DeleteConfirmationPopup from 'components/News/DeleteConfirmationPopup';
+import AddProduct from 'components/Products/AddProduct';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { GrAdd } from 'react-icons/gr';
 import { MdDeleteOutline } from 'react-icons/md';
 import 'styles/pages/Products.scss';
+
 const Product = () => {
     const [products, setProducts] = useState([]);
     const [showAddProduct, setShowAddProduct] = useState(false);
@@ -158,7 +160,13 @@ const Product = () => {
                         icon={GrAdd}
                         labelColor="#F1EFE7"
                         backgroundColor="#785B5B"
+                        onClick={() => setShowAddProduct(true)}
                     />
+                    <AddProduct
+                        show={showAddProduct}
+                        onHide={() => setShowAddProduct(false)}
+                    />
+
                     <Button
                         label="Xoá sản phẩm"
                         icon={MdDeleteOutline}
