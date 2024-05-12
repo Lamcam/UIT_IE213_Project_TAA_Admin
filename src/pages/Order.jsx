@@ -180,7 +180,7 @@ const Order = () => {
   };
 
   return (
-    <Box id='order-box' sx={{ height: "100%", width: "100%", textAlign: "center" }} >
+    <Box id='order-box' sx={{ height: "100%", width: "100%", textAlign: "center", padding: '12px' }} >
       <Button
         label="Sửa đơn hàng"
         icon={IoPencilSharp}

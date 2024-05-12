@@ -62,7 +62,7 @@ const Account = () => {
       });
   }, []);
   return (
-    <Box id='account-box' sx={{ height: "100%", width: "100%" }}>
+    <Box id='account-box' sx={{ height: "100%", width: "100%",  padding: '12px' }}>
       <DataGrid
         rows={data}
         columns={columns}
