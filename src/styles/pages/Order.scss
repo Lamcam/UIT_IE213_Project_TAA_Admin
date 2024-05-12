@@ -2,6 +2,9 @@
     color: #ba1a1a;
     font-size: 16px;
 }
-.cell_order{
+#order-box .cell_order{
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

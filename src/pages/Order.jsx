@@ -25,6 +25,7 @@ const columns = [
     headerAlign: 'center',
     headerClassName: 'col_order',
     cellClassName: 'cell_order',
+    cellAlign: 'center'
     
   },
   {
@@ -35,6 +36,7 @@ const columns = [
     headerAlign: 'center',
     headerClassName: 'col_order',
     cellClassName: 'cell_order',
+    cellAlign: 'center'
   },
   {
     field: "user_name",
@@ -45,15 +47,18 @@ const columns = [
     headerAlign: 'center',
     headerClassName: 'col_order',
     cellClassName: 'cell_order',
+    cellAlign: 'center'
   },
   {
     field: "prod_name",
     headerName: "Tên sản phẩm",
     sortable: true,
     width: 150,
+    text: "center",
     headerAlign: 'center',
     headerClassName: 'col_order',
     cellClassName: 'cell_order',
+    cellAlign: 'center'
   },
   {
     field: "quanity",
@@ -175,7 +180,7 @@ const Order = () => {
   };
 
   return (
-    <Box sx={{ height: "100%", width: "100%" }} >
+    <Box id='order-box' sx={{ height: "100%", width: "100%", textAlign: "center" }} >
       <Button
         label="Sửa đơn hàng"
         icon={IoPencilSharp}
@@ -204,11 +209,10 @@ const Order = () => {
         columns={columns}
         autoHeight
         pagination
-        autoWidth
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 11,
+              pageSize: 9,
             },
           },
         }}

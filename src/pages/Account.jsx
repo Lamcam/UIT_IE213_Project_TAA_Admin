@@ -9,13 +9,14 @@ import { MdDeleteOutline } from 'react-icons/md';
 import 'styles/pages/Account.scss';
 
 const columns = [
-  { field: "_id", headerName: "ID", width: 220, headerAlign: 'center', headerClassName: 'col_account', },
+  { field: "_id", headerName: "ID", width: 220, headerAlign: 'center', cellClassName: 'cell_acc', headerClassName: 'col_account' },
   {
     field: "user_name",
     headerName: "Tên tài khoản",
-    width: 250,
+    width: 200,
     editable: true,
     headerAlign: 'center', headerClassName: 'col_account',
+    cellClassName: 'cell_acc',
   },
   {
     field: "user_phone",
@@ -23,6 +24,7 @@ const columns = [
     width: 250,
     editable: true,
     headerAlign: 'center', headerClassName: 'col_account',
+    cellClassName: 'cell_acc',
   },
   {
     field: "user_email",
@@ -31,6 +33,7 @@ const columns = [
     width: 200,
     editable: true,
     headerAlign: 'center', headerClassName: 'col_account',
+    cellClassName: 'cell_acc',
   },
   {
     field: "user_cccd",
@@ -38,6 +41,7 @@ const columns = [
     sortable: false,
     width: 230,
     headerAlign: 'center', headerClassName: 'col_account',
+    cellClassName: 'cell_acc',
   },
 ];
 
@@ -58,7 +62,7 @@ const Account = () => {
       });
   }, []);
   return (
-    <Box sx={{ height: "100%", width: "100%" }}>
+    <Box id='account-box' sx={{ height: "100%", width: "100%" }}>
       <DataGrid
         rows={data}
         columns={columns}
