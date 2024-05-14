@@ -1,8 +1,10 @@
-import { FlareSharp } from '@mui/icons-material';
-import { DataGrid } from '@mui/x-data-grid';
+import {
+    DataGrid,
+    GridToolbar
+} from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from 'components/Common/Button1';
-import DeleteConfirmationPopup from 'components/News/DeleteConfirmationPopup';
+import DeleteConfirmationPopup from 'components/Common/DeleteConfirmationPopup';
 import AddProduct from 'components/Products/AddProduct';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
@@ -212,12 +214,50 @@ const Product = () => {
                             },
                         },
                     }}
-                    pageSizeOptions={[5]}
-                    onRowSelectionModelChange={(productSelection) => {
-                        console.log(productSelection)
-                        setSelectedRows(productSelection);
+                    slots={{
+                        toolbar: GridToolbar,
                     }}
                     localeText={{
+                        toolbarFilters: "Bộ lọc",
+                        toolbarColumns: "Cột",
+                        toolbarColumnsLabel: "Chọn cột",
+                        toolbarExport: "Xuất",
+                        toolbarExportLabel: "Xuất",
+                        toolbarExportCSV: "Xuất sang CSV",
+                        toolbarExportPrint: "In",
+                        toolbarExportExcel: "Tải Excel",
+                        columnsManagementSearchTitle: "Tìm kiếm",
+                        columnsManagementNoColumns: "Không có cột nào được hiển thị",
+                        columnsManagementShowHideAllText: "Hiển thị/Ẩn tất cả",
+                        columnsManagementReset: "Đặt lại",
+                        toolbarDensity: "Độ dày",
+                        toolbarDensityLabel: "Độ dày",
+                        toolbarDensityCompact: "Sát",
+                        toolbarDensityStandard: "Chuẩn",
+                        toolbarDensityComfortable: "Rộng",
+                        filterPanelAddFilter: "Thêm bộ lọc",
+                        filterPanelDeleteIconLabel: "Xóa",
+                        filterPanelLinkOperator: "Toán tử logic",
+                        filterPanelOperator: "Toán tử", // TODO v6: rename to filterPanelOperator
+                        filterPanelOperatorAnd: "Và",
+                        filterPanelOperatorOr: "Hoặc",
+                        filterPanelColumns: "Cột",
+                        filterPanelInputLabel: "Giá trị",
+                        filterPanelInputPlaceholder: "Giá trị bộ lọc",
+                        filterOperatorContains: "chứa",
+                        filterOperatorEquals: "bằng",
+                        filterOperatorStartsWith: "bắt đầu với",
+                        filterOperatorEndsWith: "kết thúc với",
+                        filterOperatorIs: "là",
+                        filterOperatorNot: "không là",
+                        filterOperatorAfter: "sau",
+                        filterOperatorOnOrAfter: "vào hoặc sau",
+                        filterOperatorBefore: "trước",
+                        filterOperatorOnOrBefore: "vào hoặc trước",
+                        filterOperatorIsEmpty: "trống",
+                        filterOperatorIsNotEmpty: "không trống",
+                        filterOperatorIsAnyOf: "bất kỳ trong số",
+                        noResultsOverlayLabel: 'Không có kết quả phù hợp',
                         noRowsLabel: 'Không có sản phẩm trùng với từ khóa',
                         footerRowSelected: (rowCount) => {
                             if (rowCount === 0) {
@@ -227,6 +267,14 @@ const Product = () => {
                             }
                         }
                     }}
+                    pageSizeOptions={[5]}
+                    onRowSelectionModelChange={(productSelection) => {
+                        console.log(productSelection)
+                        setSelectedRows(productSelection);
+                    }}
+                // localeText={{
+
+                // }}
                 />
             </div>
         </Container>
