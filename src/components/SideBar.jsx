@@ -7,14 +7,12 @@ import { GiBigDiamondRing } from "react-icons/gi";
 import { TfiDashboard } from "react-icons/tfi";
 import { RiBillLine } from "react-icons/ri";
 import { FaRegNewspaper } from "react-icons/fa";
-
 const SideBar = () => {
   return (
     <div className="sidebar">
       <Container className="sidebar_container">
         <Row>
-          {" "}
-          <h1>TAA admin</h1>{" "}
+          <h1>TAA admin</h1>
         </Row>
 
         <Row className="nav_container">
