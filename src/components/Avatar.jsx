@@ -3,18 +3,21 @@ import Image from 'react-bootstrap/Image';
 import avatar from '../avatar.png';
 
 function AccountSection() {
+  const handleLogout = async () => {
+    localStorage.removeItem('admin');
+    localStorage.setItem('error', "");
+    window.location.href = '/';
+  }
   return (
     <Dropdown>
-      <Image src={avatar} roundedCircle />
-      {/* <Dropdown.Toggle className='btn_dropdown' id="dropdown-basic">
-        
-      </Dropdown.Toggle> */}
+      
+      <Dropdown.Toggle className='btn_dropdown' id="dropdown-basic">
+        <Image src={avatar} roundedCircle />
+      </Dropdown.Toggle>
 
-      {/* <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu> */}
+      <Dropdown.Menu>
+        <Dropdown.Item className='logout-btn' onClick={handleLogout} > Đăng xuất</Dropdown.Item>
+      </Dropdown.Menu>
     </Dropdown>
   );
 }

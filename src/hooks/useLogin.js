@@ -7,27 +7,29 @@ export function useLogIn() {
     const { setAuth, dispatch, auth } = useAuthContext();
     const [loading, setLoading] = useState(null);
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState(''); 
+    const [passwordLog, setPassword] = useState(''); 
     const logIn = async ( username, password ) => {
         try {
             const res = await axios.post('http://localhost:8000/admin/login', { username, password} )
             if (res.status === 200) {
                 await setAuth(true);
                 localStorage.setItem('admin', res.data);
+                localStorage.setItem('error', '');
                 setTimeout(() => {
                     window.location.href = '/dashboard';
                 },1000)
 
             }
-            if(res.status === 404){
-                setEmail('Không tìm thấy tài khoản!');
-            }
+           
+           
+            
 
         } catch (error) {
-            if(error.response.status===404 && error.response.data.message ==='Không tìm thấy admin')
-                setEmail('Email không tồn tại!');
-            if (error.response.status === 400  && error.response.data.message === 'Sai mật khẩu')
-                setPassword('Mật khẩu không khớp!')
+            if(error.response.status===404 )
+                localStorage.setItem("error", 'Không tìm thấy tài khoản!');
+            if (error.response.status === 400 )
+                localStorage.setItem("error", 'Sai mật khẩu!');
+
             console.log('err', error)
         }
         

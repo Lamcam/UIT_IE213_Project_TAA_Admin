@@ -138,6 +138,10 @@ section.login {
     white-space: nowrap;
   }
 
+  .login_btn:active {
+    background-color: rgba(120, 91, 91, 0.8) ;
+  }
+
   // .login_btn:active,
   // .login_btn:focus .register_btn:active,
   // .register_btn:focus {
