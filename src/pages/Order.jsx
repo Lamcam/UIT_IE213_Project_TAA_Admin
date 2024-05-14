@@ -223,6 +223,7 @@ const Order = () => {
         rows={data}
         columns={columns}
         autoHeight
+        autoWidth
         pagination
         initialState={{
           pagination: {
