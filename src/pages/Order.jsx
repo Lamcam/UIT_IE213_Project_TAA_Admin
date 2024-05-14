@@ -13,30 +13,35 @@ import axios from "axios";
 import { IoPencilSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import Button from "components/Common/Button1";
-import 'styles/pages/Order.scss'
+import "styles/pages/Order.scss";
 
 const columns = [
-  { field: "id", headerName: "Mã đơn hàng", width: 100, headerAlign: 'center', headerClassName: 'col_order', cellClassName: 'cell_order' },
+  {
+    field: "id",
+    headerName: "Mã đơn hàng",
+    width: 100,
+    headerAlign: "center",
+    headerClassName: "col_order",
+  },
   {
     field: "date_time",
     headerName: "Ngày đặt hàng",
     width: 150,
     editable: true,
-    headerAlign: 'center',
-    headerClassName: 'col_order',
-    cellClassName: 'cell_order',
-    cellAlign: 'center'
-    
+    headerAlign: "center",
+    headerClassName: "col_order",
+    cellClassName: "cell_order",
+    cellAlign: "center",
   },
   {
     field: "cost",
     headerName: "Giá trị đơn hàng",
     width: 150,
     editable: true,
-    headerAlign: 'center',
-    headerClassName: 'col_order',
-    cellClassName: 'cell_order',
-    cellAlign: 'center'
+    headerAlign: "center",
+    headerClassName: "col_order",
+    cellClassName: "cell_order",
+    cellAlign: "center",
   },
   {
     field: "user_name",
@@ -44,10 +49,10 @@ const columns = [
     type: "number",
     width: 110,
     editable: true,
-    headerAlign: 'center',
-    headerClassName: 'col_order',
-    cellClassName: 'cell_order',
-    cellAlign: 'center'
+    headerAlign: "center",
+    headerClassName: "col_order",
+    cellClassName: "cell_order",
+    cellAlign: "center",
   },
   {
     field: "prod_name",
@@ -55,19 +60,19 @@ const columns = [
     sortable: true,
     width: 150,
     text: "center",
-    headerAlign: 'center',
-    headerClassName: 'col_order',
-    cellClassName: 'cell_order',
-    cellAlign: 'center'
+    headerAlign: "center",
+    headerClassName: "col_order",
+    // cellClassName: 'cell_order',
+    cellAlign: "center",
   },
   {
     field: "quanity",
     headerName: "Số lượng",
     type: "number",
     sortable: true,
-    headerAlign: 'center',
-    headerClassName: 'col_order',
-    cellClassName: 'cell_order',
+    headerAlign: "center",
+    headerClassName: "col_order",
+    cellClassName: "cell_order",
   },
   {
     field: "order_is_paying",
@@ -75,10 +80,10 @@ const columns = [
     type: "dropdown",
     sortable: true,
     editable: true,
-    headerAlign: 'center',
+    headerAlign: "center",
     width: 160,
-    headerClassName: 'col_order',
-    cellClassName: 'cell_order',
+    headerClassName: "col_order",
+    cellClassName: "cell_order",
   },
   {
     field: "order_status",
@@ -86,9 +91,9 @@ const columns = [
     sortable: true,
     editable: true,
     width: 160,
-    headerAlign: 'center',
-    headerClassName: 'col_order',
-    cellClassName: 'cell_order',
+    headerAlign: "center",
+    headerClassName: "col_order",
+    cellClassName: "cell_order",
   },
 ];
 
@@ -105,7 +110,7 @@ const formatDateTime = (date) => {
   const dateObject = new Date(date).toLocaleString();
   const options = { day: "numeric", month: "numeric", year: "numeric" };
   const formattedDate = dateObject.toLocaleString("en-GB", options);
-  const final = formattedDate.split(",")[0]
+  const final = formattedDate.split(",")[0];
   return final;
   // return formattedDate;
 };
@@ -135,7 +140,6 @@ const createData = (info) => {
   return temp;
 };
 
-
 const Order = () => {
   const [data, setData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -158,12 +162,14 @@ const Order = () => {
     const update = data.find((e) => e.id === item._id);
     console.log(item);
     console.log(update);
-    if(update){
-      update.order_is_paying = item.order_is_paying === 0 ? "Chưa thanh toán" : "Đã thanh toán";
-      update.order_status = item.order_status === 0 ? "Chưa giao hàng" : "Đã giao hàng";
+    if (update) {
+      update.order_is_paying =
+        item.order_is_paying === 0 ? "Chưa thanh toán" : "Đã thanh toán";
+      update.order_status =
+        item.order_status === 0 ? "Chưa giao hàng" : "Đã giao hàng";
       setData([...data]);
     }
-  }
+  };
 
   const setValue = (Selection, data) => {
     if (Selection.length > 0) {
@@ -180,8 +186,17 @@ const Order = () => {
   };
 
   return (
-    <Box id='order-box' sx={{ height: "100%", width: "100%", textAlign: "center", padding: '12px' }} >
+    <Box
+      id="order-box"
+      sx={{
+        height: "100%",
+        width: "100%",
+        textAlign: "center",
+        padding: "12px",
+      }}
+    >
       <Button
+        className="btn-update"
         label="Sửa đơn hàng"
         icon={IoPencilSharp}
         iconHeight="24px"
@@ -220,6 +235,14 @@ const Order = () => {
           toolbar: GridToolbar,
         }}
         localeText={{
+          noRowsLabel: "Không có đơn hàng trùng với từ khóa",
+          footerRowSelected: (rowCount) => {
+            if (rowCount === 0) {
+              return "Chưa có đơn hàng nào được chọn";
+            } else {
+              return `${rowCount} đơn hàng được chọn`;
+            }
+          },
           toolbarFilters: "Bộ lọc",
           toolbarColumns: "Cột",
           toolbarColumnsLabel: "Chọn cột",
