@@ -1,12 +1,15 @@
+import { FlareSharp } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from 'components/Common/Button1';
 import DeleteConfirmationPopup from 'components/News/DeleteConfirmationPopup';
+import AddProduct from 'components/Products/AddProduct';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { GrAdd } from 'react-icons/gr';
 import { MdDeleteOutline } from 'react-icons/md';
 import 'styles/pages/Products.scss';
+
 const Product = () => {
     const [products, setProducts] = useState([]);
     const [showAddProduct, setShowAddProduct] = useState(false);
@@ -15,7 +18,7 @@ const Product = () => {
     const title = "Xác nhận xóa sản phẩm";
     const body = "Bạn có chắc chắn muốn xóa các sản phẩm đã chọn không ?";
     const [searchKeyword, setSearchKeyword] = useState("");
-    useEffect(() => {
+    const fetchData = () => {
         axios.get('http://localhost:8000/products/cate')
             .then((res) => {
                 const formattedData = res.data.map(item => ({
@@ -31,9 +34,14 @@ const Product = () => {
             .catch((err) => {
                 console.log(err);
             })
+    };
+    useEffect(() => {
+        fetchData()
     }, []);
+    const handleProductAdded = () => {
+        fetchData();
+    }
 
-    console.log(products)
     const formatPrice = (price) => {
         const priceNumber = parseFloat(price);
         let formattedPrice = priceNumber.toLocaleString('vi-VN', { maximumFractionDigits: 0 });
@@ -115,7 +123,7 @@ const Product = () => {
                         discount: (item.prod_discount.$numberDecimal * 100) + '%',
                         BeforDiscountPrice: formatPrice(item.prod_cost.$numberDecimal),
                         cate_name: item.cate_id.cate_name,
-                        firstImageProduct: item.prod_image[0],
+                        firstImageProduct: item.prod_img[0],
                     }));
                     setProducts(formattedData); // Cập nhật products với dữ liệu mới
                 })
@@ -129,7 +137,6 @@ const Product = () => {
             console.error('Error deleting product:', error);
         }
     };
-    console.log(products)
     // Hàm chuyển đổi chuỗi tiếng Việt có dấu thành chuỗi không dấu
     const removeDiacritics = (str) => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -158,6 +165,12 @@ const Product = () => {
                         icon={GrAdd}
                         labelColor="#F1EFE7"
                         backgroundColor="#785B5B"
+                        onClick={() => setShowAddProduct(true)}
+                    />
+                    <AddProduct
+                        show={showAddProduct}
+                        onHide={() => setShowAddProduct(false)}
+                        onProductAdded={handleProductAdded}
                     />
                     <Button
                         label="Xoá sản phẩm"
