@@ -11,8 +11,8 @@ function AddNews(props) {
         b_title: '',
         b_date: '',
         b_content: '',
-        b_heading: [],
-        b_text: [],
+        b_heading: ['', '', ''],
+        b_text: ['', '', ''],
         b_image: []
     });
 
@@ -27,12 +27,30 @@ function AddNews(props) {
         setFormCompleted(false);
     };
 
+    const handleFieldChange = (e, field, index) => {
+        const { value } = e.target;
+        const newFields = [...news[field]];
+        newFields[index] = value;
+        setNews({ ...news, [field]: newFields });
+    };
+
     const checkFormCompletion = () => {
-        for (const key in news) {
-            if (news.hasOwnProperty(key) && !news[key]) {
+        if (!news.b_title || !news.b_content) {
+            return false;
+        }
+
+        for (let i = 0; i < news.b_heading.length; i++) {
+            if (!news.b_heading[i]) {
                 return false;
             }
         }
+
+        for (let i = 0; i < news.b_text.length; i++) {
+            if (!news.b_text[i]) {
+                return false;
+            }
+        }
+
         return formData.getAll('image').length > 0;
     };
 
@@ -86,13 +104,15 @@ function AddNews(props) {
         const simulateProgress = () => {
             setTimeout(() => setUploadProgress(10), 1000);
             setTimeout(() => setUploadProgress(20), 2000);
-            setTimeout(() => setUploadProgress(40), 3000);
-            setTimeout(() => setUploadProgress(50), 4000);
-            setTimeout(() => setUploadProgress(60), 5000);
-            setTimeout(() => setUploadProgress(75), 6000);
-            setTimeout(() => setUploadProgress(80), 7000);
-            setTimeout(() => setUploadProgress(90), 8000);
-            setTimeout(() => setUploadProgress(100), 9000);
+            setTimeout(() => setUploadProgress(40), 4000);
+            setTimeout(() => setUploadProgress(50), 5000);
+            setTimeout(() => setUploadProgress(60), 6000);
+            setTimeout(() => setUploadProgress(75), 7000);
+            setTimeout(() => setUploadProgress(80), 8000);
+            setTimeout(() => setUploadProgress(85), 9000);
+            setTimeout(() => setUploadProgress(90), 11000);
+            setTimeout(() => setUploadProgress(95), 12000);
+            setTimeout(() => setUploadProgress(100), 13000);
         };
 
         simulateProgress();
@@ -106,7 +126,7 @@ function AddNews(props) {
                     .then((addNewsResponse) => {
                         if (addNewsResponse.status === 201) {
                             console.log(addNewsResponse.data);
-                            props.onNewsAdded();
+                            props.onNewAdded();
                             props.onHide();
                         } else {
                             console.error('Failed to add news:', addNewsResponse.status);
@@ -124,29 +144,12 @@ function AddNews(props) {
         }
     };
 
-    const addField = (field) => {
-        setNews({ ...news, [field]: [...news[field], ''] });
-    };
-
-    const handleFieldChange = (e, field, index) => {
-        const { value } = e.target;
-        const newFields = [...news[field]];
-        newFields[index] = value;
-        setNews({ ...news, [field]: newFields });
-    };
-
-    const handleRemoveField = (field, index) => {
-        const newFields = [...news[field]];
-        newFields.splice(index, 1);
-        setNews({ ...news, [field]: newFields });
-    };
-
     const getCurrentDate = () => {
         const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
         const dd = String(today.getDate()).padStart(2, '0');
-        return `${yyyy}-${mm}-${dd}`;
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        return `(${dd}/${mm}/${yyyy})`;
     };
 
     return (
@@ -155,7 +158,7 @@ function AddNews(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            id="ad_addnews"
+            id="ad_addnew"
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -181,22 +184,29 @@ function AddNews(props) {
                         <Form.Group controlId="b_heading">
                             <Form.Label>Tiêu đề phụ</Form.Label>
                             {news.b_heading.map((heading, index) => (
-                                <div key={index} className="dynamic-field">
-                                    <Form.Control type="text" value={heading} onChange={(e) => handleFieldChange(e, 'b_heading', index)} placeholder="Tiêu đề phụ" />
-                                    <Button label="Xóa" onClick={() => handleRemoveField('b_heading', index)} />
-                                </div>
+                                <Form.Control
+                                    key={index}
+                                    type="text"
+                                    value={heading}
+                                    onChange={(e) => handleFieldChange(e, 'b_heading', index)}
+                                    placeholder={`Tiêu đề phụ ${index + 1}`}
+                                    className="subfield-spacing"
+                                />
                             ))}
-                            <Button label="Thêm tiêu đề phụ" onClick={() => addField('b_heading')} />
                         </Form.Group>
                         <Form.Group controlId="b_text">
                             <Form.Label>Nội dung phụ</Form.Label>
                             {news.b_text.map((text, index) => (
-                                <div key={index} className="dynamic-field">
-                                    <Form.Control as="textarea" rows={2} value={text} onChange={(e) => handleFieldChange(e, 'b_text', index)} placeholder="Nội dung phụ" />
-                                    <Button label="Xóa" onClick={() => handleRemoveField('b_text', index)} />
-                                </div>
+                                <Form.Control
+                                    key={index}
+                                    as="textarea"
+                                    rows={2}
+                                    value={text}
+                                    onChange={(e) => handleFieldChange(e, 'b_text', index)}
+                                    placeholder={`Nội dung phụ ${index + 1}`}
+                                    className="subfield-spacing"
+                                />
                             ))}
-                            <Button label="Thêm nội dung phụ" onClick={() => addField('b_text')} />
                         </Form.Group>
                         <Form.Group controlId="b_image">
                             <Form.Label>Hình ảnh</Form.Label>
