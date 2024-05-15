@@ -134,6 +134,25 @@ function AddProduct(props) {
             setUploadProgress(0);
         }
     };
+    const handleBlurNumber = () => {
+        let numberAvai = parseFloat(product.prod_num_avai);
+
+        if (isNaN(numberAvai) || numberAvai < 0) {
+            numberAvai = 1;
+        }
+
+        setProduct({ ...product, prod_num_avai: numberAvai });
+    };
+
+    const handleBlurPrice = () => {
+        let numberAvai = parseFloat(product.prod_cost);
+
+        if (isNaN(numberAvai) || numberAvai < 0) {
+            numberAvai = 1;
+        }
+
+        setProduct({ ...product, prod_cost: numberAvai });
+    };
 
 
     const handleBlur = () => {
@@ -181,7 +200,15 @@ function AddProduct(props) {
                         </Form.Group>
                         <Form.Group controlId="prod_cost">
                             <Form.Label>Giá sản phẩm</Form.Label>
-                            <Form.Control type="number" name="prod_cost" placeholder="Giá sản phẩm" value={product.prod_cost} onChange={handleChange} />
+                            <Form.Control
+                                type="number"
+                                name="prod_cost"
+                                placeholder="Giá sản phẩm"
+                                min="0"
+                                value={product.prod_cost}
+                                onChange={handleChange}
+                                onBlur={handleBlurPrice}
+                            />
                         </Form.Group>
                         <Form.Group controlId="prod_discount">
                             <Form.Label>Giảm giá (%)</Form.Label>
@@ -204,7 +231,15 @@ function AddProduct(props) {
                         </Form.Group>
                         <Form.Group controlId="prod_num_avai">
                             <Form.Label>Số lượng</Form.Label>
-                            <Form.Control type="number" name="prod_num_avai" placeholder="Số lượng còn lại" value={product.prod_num_avai} onChange={handleChange} />
+                            <Form.Control
+                                type="number"
+                                name="prod_num_avai"
+                                min="0"
+                                placeholder="Số lượng còn lại"
+                                value={product.prod_num_avai}
+                                onChange={handleChange}
+                                onBlur={handleBlurNumber}
+                            />
                         </Form.Group>
                         <Form.Group controlId="cate_name">
                             <Form.Label>Danh mục</Form.Label>
