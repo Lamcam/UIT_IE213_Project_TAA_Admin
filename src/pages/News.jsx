@@ -11,6 +11,8 @@ import { GrAdd } from 'react-icons/gr';
 import 'styles/pages/News.scss';
 import DeleteConfirmationPopup from 'components/Common/DeleteConfirmationPopup';
 import AddNew from 'components/News/AddNew';
+import { MdEdit } from 'react-icons/md';
+import EditNew from 'components/News/EditNew';
 
 const News = () => {
     const [news, setNews] = useState([]);
@@ -20,6 +22,8 @@ const News = () => {
     const body = "Bạn có chắc chắn muốn xóa các bài viết đã chọn không ?";
     const [searchKeyword, setSearchKeyword] = useState("");
     const [showAddNew, setShowAddNew] = useState(false);
+    const [showEditNew, setShowEditNew] = useState(false);
+
     const fetchDataNews = () => {
         axios.get('http://localhost:8000/news')
             .then((res) => {
@@ -42,6 +46,9 @@ const News = () => {
         fetchDataNews();
     }
 
+    const handleNewUpdated = () => {
+        fetchDataNews();
+    };
     const columns = [
         {
             field: 'b_title',
@@ -141,12 +148,34 @@ const News = () => {
                         onHide={() => setShowAddNew(false)}
                         onNewAdded={handleNewAdded}
                     />
+
                     <Button
-                        label="Xoá bài viết"
+                        label="Sửa"
+                        icon={MdEdit}
+                        iconHeight="24px"
+                        iconWidth="24px"
+                        border={selectedRows.length === 1 ? "1px solid #785B5B" : '1px solid #E3E3E4'}
+                        labelColor={selectedRows.length === 1 ? "#F1EFE7" : "#999797"}
+                        backgroundColor={selectedRows.length === 1 ? "#785B5B" : "#E3E3E4"}
+                        onClick={() => {
+                            if (selectedRows.length === 1) {
+                                setShowEditNew(true);
+                            }
+                        }}
+                    />
+                    <EditNew
+                        show={showEditNew}
+                        onHide={() => setShowEditNew(false)}
+                        onNewUpdated={handleNewUpdated}
+                        newId={selectedRows}
+                    />
+
+                    <Button
+                        label="Xoá"
                         icon={MdDeleteOutline}
                         iconHeight="24px"
                         iconWidth="24px"
-                        border={selectedRows.length > 0 ? "1px solid #ba1a1a" : 'none'}
+                        border={selectedRows.length > 0 ? "1px solid #ba1a1a" : '1px solid #E3E3E4'}
                         labelColor={selectedRows.length > 0 ? "#F1EFE7" : "#999797"}
                         backgroundColor={selectedRows.length > 0 ? "#ba1a1a" : "#E3E3E4"}
                         onClick={() => {

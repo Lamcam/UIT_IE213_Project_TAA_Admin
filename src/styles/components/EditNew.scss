@@ -1,0 +1,29 @@
+#ad_editnew .modal-header {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+#ad_editnew .subfield-spacing {
+  margin-bottom: 12px;
+}
+
+#ad_editnew {
+  .image-upload {
+    display: flex;
+    align-items: center;
+    padding-bottom: 12px;
+  }
+
+  .new-image {
+    margin-right: 20px;
+  }
+
+  .new-image img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+}
+#ad_editnew .modal-footer {
+  border: none;
+  padding-top: 0;
+}

@@ -1,8 +1,11 @@
 #ad_addnew .subfield-spacing {
   margin-bottom: 12px;
 }
-
+#ad_addnew .modal-header {
+  padding-bottom: 0;
+  border-bottom: none;
+}
 #ad_addnew .modal-footer {
-    border: none;
-  }
-  
+  border: none;
+  padding-top: 0;
+}
