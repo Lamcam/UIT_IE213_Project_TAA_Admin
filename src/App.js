@@ -32,7 +32,7 @@ const router = createBrowserRouter(
     <Route element={<PrivateRoutes></PrivateRoutes>}>
         <Route element={<AdminRootLayout />} >
           <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          {/* <Route path="dashboard" element={<Dashboard />} /> */}
           <Route path="news" element={<News />} />
           <Route path="products" element={<Products />} />
           <Route path="accounts" element={<Account />} />
