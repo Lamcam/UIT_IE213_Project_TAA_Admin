@@ -16,7 +16,7 @@ export function useLogIn() {
                 localStorage.setItem('admin', res.data);
                 localStorage.setItem('error', '');
                 setTimeout(() => {
-                    window.location.href = '/dashboard';
+                    window.location.href = '/accounts';
                 },1000)
 
             }
