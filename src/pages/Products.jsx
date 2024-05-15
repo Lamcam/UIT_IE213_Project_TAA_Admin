@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { GrAdd } from 'react-icons/gr';
 import { MdDeleteOutline } from 'react-icons/md';
+import { MdEdit } from 'react-icons/md';
+import EditProduct from 'components/Products/EditProduct';
 import 'styles/pages/Products.scss';
 
 const Product = () => {
@@ -20,6 +22,8 @@ const Product = () => {
     const title = "Xác nhận xóa sản phẩm";
     const body = "Bạn có chắc chắn muốn xóa các sản phẩm đã chọn không ?";
     const [searchKeyword, setSearchKeyword] = useState("");
+    const [showEditProduct, setShowEditProduct] = useState(false);
+
     const fetchData = () => {
         axios.get('http://localhost:8000/products/cate')
             .then((res) => {
@@ -43,6 +47,10 @@ const Product = () => {
     const handleProductAdded = () => {
         fetchData();
     }
+
+    const handleProductUpdated = () => {
+        fetchData();
+    };
 
     const formatPrice = (price) => {
         const priceNumber = parseFloat(price);
@@ -175,11 +183,31 @@ const Product = () => {
                         onProductAdded={handleProductAdded}
                     />
                     <Button
-                        label="Xoá sản phẩm"
+                        label="Sửa"
+                        icon={MdEdit}
+                        iconHeight="24px"
+                        iconWidth="24px"
+                        border={selectedRows.length === 1 ? "1px solid #785B5B" : '1px solid #E3E3E4'}
+                        labelColor={selectedRows.length === 1 ? "#F1EFE7" : "#999797"}
+                        backgroundColor={selectedRows.length === 1 ? "#785B5B" : "#E3E3E4"}
+                        onClick={() => {
+                            if (selectedRows.length === 1) {
+                                setShowEditProduct(true);
+                            }
+                        }}
+                    />
+                    <EditProduct
+                        show={showEditProduct}
+                        onHide={() => setShowEditProduct(false)}
+                        onProductUpdated={handleProductUpdated}
+                        productId={selectedRows}
+                    />
+                    <Button
+                        label="Xoá"
                         icon={MdDeleteOutline}
                         iconHeight="24px"
                         iconWidth="24px"
-                        border={selectedRows.length > 0 ? "1px solid #ba1a1a" : 'none'}
+                        border={selectedRows.length > 0 ? "1px solid #ba1a1a" : '1px solid #E3E3E4'}
                         labelColor={selectedRows.length > 0 ? "#F1EFE7" : "#999797"}
                         backgroundColor={selectedRows.length > 0 ? "#ba1a1a" : "#E3E3E4"}
                         onClick={() => {

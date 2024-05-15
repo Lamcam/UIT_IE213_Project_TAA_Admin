@@ -1,0 +1,26 @@
+#ad_editproduct .modal-header {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+#ad_editproduct {
+  .image-upload {
+    display: flex;
+    align-items: center;
+    padding-bottom: 12px;
+  }
+
+  .product-image {
+    margin-right: 20px;
+  }
+
+  .product-image img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+}
+
+#ad_editproduct .modal-footer {
+  border: none;
+  padding-top: 0;
+}

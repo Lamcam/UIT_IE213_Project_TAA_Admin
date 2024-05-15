@@ -297,7 +297,7 @@ function AddProduct(props) {
                     <Button
                         label="Lưu"
                         labelColor={formCompleted ? "#F1EFE7" : "#999797"}
-                        border={formCompleted ? "1px solid #785B5B" : 'none'}
+                        border={formCompleted ? "1px solid #785B5B" : '1px solid #E3E3E4'}
                         backgroundColor={formCompleted ? "#785B5B" : "#e3e3e4"}
                         onClick={handleSubmit}
                         disabled={!formCompleted}
