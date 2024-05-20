@@ -8,6 +8,16 @@ function ModalUpdateOrder(props) {
   const [status, setStatus] = useState(0);
   const [paying, setPaying] = useState(0);
 
+  const styleBtn = {
+    backgroundColor: 'rgb(120, 91, 91)',
+    border: '1px solid rgb(133, 115, 115)',
+  }
+
+  const canBtn = {
+    backgroundColor: 'transparent',
+    color: 'rgb(120, 91, 91)',
+    border: '1px solid rgb(120, 91, 91)',
+  }
   const handleChangeStatus = (e) => {
     if (e.target.value === "0") {
       setStatus(0);
@@ -64,8 +74,8 @@ function ModalUpdateOrder(props) {
         </Form.Select>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-        <Button onClick={handleSubmit}>Lưu</Button>
+        <Button className='modal_can_btn' style={canBtn} onClick={props.onHide}>Hủy</Button>
+        <Button className='modal_con_btn' style={styleBtn} onClick={handleSubmit}>Lưu</Button>
       </Modal.Footer>
     </Modal>
   );

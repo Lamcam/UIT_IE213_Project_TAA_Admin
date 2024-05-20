@@ -13,3 +13,32 @@
     margin-bottom: 12px;
     margin-left: auto;
 }
+
+.modal_can_btn{
+    min-width: 8rem;
+    border-radius: 8px;
+    padding: 0px;
+    background-color: transparent;
+    font-family: Roboto;
+    font-size: 14px;
+    border: 1px solid rgb(133, 115, 115);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.modal_con_btn{
+    min-width: 8rem;
+    border-radius: 8px;
+    padding: 0px;
+    background-color: rgb(120, 91, 91);
+    font-family: Roboto;
+    font-size: 14px;
+    border: 1px solid rgb(133, 115, 115);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+
+}
